@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 void main() {
   print("=========================================");
@@ -8,39 +7,36 @@ void main() {
   print("Can u guess on what number is on my mind? choose between 1-100 only");
   print("Try to guess what it is!");
 
-  final random = Random();
   const int minNumber = 1;
   const int maxNumber = 100;
-  final int magicNumber = minNumber + random.nextInt(maxNumber); 
+  final int magicNumber = 62; // Fixed magic number
 
   int guessCount = 0;
-  
   int? playerGuess;
 
   while (playerGuess != magicNumber) {
-    guessCount++; 
+    guessCount++;
 
     int? currentGuess;
-    
+
     print("\n-----------------------------------------");
-    
+
     while (currentGuess == null) {
       stdout.write("Guess #$guessCount. Enter your guess ($minNumber - $maxNumber): ");
       String? input = stdin.readLineSync()?.trim();
-      
+
       currentGuess = int.tryParse(input ?? '');
-      
+
       if (currentGuess == null) {
         stderr.writeln("Invalid input. Please enter a whole number.");
       } else if (currentGuess < minNumber || currentGuess > maxNumber) {
         stderr.writeln("Your guess is outside the range ($minNumber - $maxNumber). Try again.");
-        currentGuess = null; 
+        currentGuess = null;
       }
     }
-    
+
     playerGuess = currentGuess;
     print("-----------------------------------------");
-
 
     if (playerGuess! < magicNumber) {
       print("Hint: Too LOW! Try a higher number.");
@@ -49,7 +45,6 @@ void main() {
       print("Hint: Too HIGH! Try a lower number.");
       print("-----------------------------------------");
     }
-    
   }
 
   print("\n=========================================");
